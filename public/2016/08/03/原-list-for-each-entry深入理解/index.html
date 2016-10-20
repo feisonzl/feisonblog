@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原]list_for_each_entry深入理解 | feison&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在内核编程中经常会遇到list_for_each_entry(pos, head, member)，今天深入分析一下list_for_each_entry在内核中是如何定义的。 
+list_for_each_entry主要作用是遍历给定类型的链表，被定义在include/linux/list.h中：
+/**
+ * list_for_each_entry  -   iterate over list">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]list_for_each_entry深入理解">
+<meta property="og:url" content="https://feisonzl.github.io/2016/08/03/原-list-for-each-entry深入理解/index.html">
+<meta property="og:site_name" content="feison's blog">
+<meta property="og:description" content="在内核编程中经常会遇到list_for_each_entry(pos, head, member)，今天深入分析一下list_for_each_entry在内核中是如何定义的。 
+list_for_each_entry主要作用是遍历给定类型的链表，被定义在include/linux/list.h中：
+/**
+ * list_for_each_entry  -   iterate over list">
+<meta property="og:updated_time" content="2016-10-20T09:38:00.111Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原]list_for_each_entry深入理解">
+<meta name="twitter:description" content="在内核编程中经常会遇到list_for_each_entry(pos, head, member)，今天深入分析一下list_for_each_entry在内核中是如何定义的。 
+list_for_each_entry主要作用是遍历给定类型的链表，被定义在include/linux/list.h中：
+/**
+ * list_for_each_entry  -   iterate over list">
+  
+    <link rel="alternative" href="/atom.xml" title="feison&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">feison</a></h1>
+        </hgroup>
+
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">feison</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img lazy-src="/img/avatar.png" class="js-avatar">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">feison</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-原-list-for-each-entry深入理解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/03/原-list-for-each-entry深入理解/" class="article-date">
+      <time datetime="2016-08-03T18:49:58.000Z" itemprop="datePublished">2016-08-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [原]list_for_each_entry深入理解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在内核编程中经常会遇到list_for_each_entry(pos, head, member)，今天深入分析一下list_for_each_entry在内核中是如何定义的。 </p>
+<p>list_for_each_entry主要作用是遍历给定类型的链表，被定义在include/linux/list.h中：</p>
+<pre><code>/**
+ * list_for_each_entry  -   iterate over list of given type
+ * @pos:    the type * to use as a loop cursor.
+ * @head:   the head for your list.
+ * @member: the name of the list_struct within the struct.
+ */
+#define list_for_each_entry(pos, head, member)              \
+    for (pos = list_entry((head)-&amp;gt;next, typeof(*pos), member);  \
+         &amp;amp;pos-&amp;gt;member != (head);    \
+         pos = list_entry(pos-&amp;gt;member.next, typeof(*pos), member))`
+
+接着需要理解list_entry，list_entry的作用是获取条目的结构类型，同样被定义在include/linux/list.h中：
+
+ass=&quot;prettyprint&quot;&gt;`/**
+ * list_entry - get the struct for this entry
+ * @ptr:    the &amp;amp;struct list_head pointer.
+ * @type:   the type of the struct this is embedded in.
+ * @member: the name of the list_struct within the struct.
+ */
+#define list_entry(ptr, type, member) \
+    container_of(ptr, type, member)`
+
+container_of作用是通过结构体成员变量的地址和结构体成员变量名以及结构体类型获取该结构体变量的地址，被定义在include/linux/kernel.h中：
+
+ass=&quot;prettyprint&quot;&gt;`/**
+ * container_of - cast a member of a structure out to the containing structure
+ * @ptr:    the pointer to the member.
+ * @type:   the type of the container struct this is embedded in.
+ * @member: the name of the member within the struct.
+ *
+ */
+#define container_of(ptr, type, member) ({          \
+    const typeof( ((type *)0)-&amp;gt;member ) *__mptr = (ptr);    \
+    (type *)( (char *)__mptr - offsetof(type,member) );})`
+
+const typeof( ((type *)0)-&amp;gt;member ) *__mptr = (ptr); 
+
+typeof是c    语言的一个新拓展，有多重用法，主要用于得到其参数的类型，参数可以是表达式，函数，类型等，这里表示获取成员member的类型。 
+
+这里定义的局部指针变量__mptr被赋值为member的地址。
+
+(type _)( (char _)__mptr - offsetof(type,member) ); 
+
+ (char *)__mptr：将__mptr转换为字节类型地址。 
+
+offsetof(type, member)的作用是返回member在type中的偏移，其在include/linux/stddef.h中的定义如下：
+
+ass=&quot;prettyprint&quot;&gt;`#ifdef __compiler_offsetof
+#define offsetof(TYPE,MEMBER) __compiler_offsetof(TYPE,MEMBER)
+#else
+#define offsetof(TYPE, MEMBER) ((size_t) &amp;amp;((TYPE *)0)-&amp;gt;MEMBER)
+#endif
+</code></pre><p>用实际的结构体成员变量的地址减去成员变量在结构体中的偏移地址，自然就得到该结构体变量的起始地址，最终得到(type*)类型的指针。</p>
+<pre><code>    作者：WEINILUO 发表于2016/8/3 14:49:58 [原文链接](http://blog.csdn.net/weiniluo/article/details/52103145)
+
+
+阅读：114 评论：0 [查看评论](http://blog.csdn.net/weiniluo/article/details/52103145#comments)
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/08/03/原-list-for-each-entry深入理解/">[原]list_for_each_entry深入理解</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 feison 的个人博客">feison</a></p>
+        <p><span>发布时间:</span>2016年08月03日 - 14时49分</p>
+        <p><span>最后更新:</span>2016年10月20日 - 05时38分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/03/原-list-for-each-entry深入理解/" title="[原]list_for_each_entry深入理解">https://feisonzl.github.io/2016/08/03/原-list-for-each-entry深入理解/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://feisonzl.github.io/2016/08/03/原-list-for-each-entry深入理解/　　作者: feison" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/08/24/原-ubuntu-定时任务/">
+                    [原]ubuntu 定时任务
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/08/03/原-SSH端口转发与内网穿透/">
+                    [原]SSH端口转发与内网穿透
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'feisonzl@gmail.com'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/08/24/原-ubuntu-定时任务/" title="上一篇: [原]ubuntu 定时任务">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/08/03/原-SSH端口转发与内网穿透/" title="下一篇: [原]SSH端口转发与内网穿透">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/原-中断处理/">[原]中断处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/原-驱动中ioctl的使用/">[原]驱动中ioctl的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/原-时间、延迟及延缓操作/">[原]时间、延迟及延缓操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/18/原-I2C协议/">[原]I2C协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/12/转-attribute-机制/">[转]__attribute__机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/26/原-Device-Tree-入门/">[原]Device Tree 入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/原-c-差缺补漏/">[原]c 差缺补漏</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/24/原-ubuntu-定时任务/">[原]ubuntu 定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/03/原-list-for-each-entry深入理解/">[原]list_for_each_entry深入理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/03/原-SSH端口转发与内网穿透/">[原]SSH端口转发与内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/08/转-搬瓦工网速优化net-speeder/">[转]搬瓦工网速优化net-speeder</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/原-网络驱动接口笔记/">[原]网络驱动接口笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/原-shell-初识/">[原]shell  初识</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/31/原-android系统重启流程分析/">[原]android系统重启流程分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/原-linux字符设备驱动初识/">[原]linux字符设备驱动初识</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/27/原-并发与竞态/">[原]并发与竞态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/转-MIPI-小结/">[转]MIPI 小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/23/原-Makfile笔记/">[原]Makfile笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/26/原-windows下的adb连接调试/">[原]windows下的adb连接调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/原-ubuntu下添加用户/">[原]ubuntu下添加用户</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: false,
+            isPost: true,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 feison
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        <div class="visit">
+            <span id="busuanzi_container_site_pv" style='display:none'>
+                <span id="site-visit" >本站到访数: 
+                    <span id="busuanzi_value_site_uv"></span>
+                </span>
+            </span>
+            <span id="busuanzi_container_page_pv" style='display:none'>
+                <span id="page-visit">, 本页阅读量: 
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+            </span>
+        </div>
+    </div>
+</footer>
+    </div>
+    
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

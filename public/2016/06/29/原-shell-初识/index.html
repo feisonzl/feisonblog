@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原]shell  初识 | feison&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.shell简介1.1 shellShell 是一个用C语言编写的程序，它是用户使用Linux的桥梁。Shell既是一种命令语言，又是一种程序设计语言。
+Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。`&amp;lt;/pre&amp;gt;
+
+#### 1.2 shell脚本
+
+&amp;lt;pre class=&amp;quot;prettyprint&amp;quot;&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]shell  初识">
+<meta property="og:url" content="https://feisonzl.github.io/2016/06/29/原-shell-初识/index.html">
+<meta property="og:site_name" content="feison's blog">
+<meta property="og:description" content="1.shell简介1.1 shellShell 是一个用C语言编写的程序，它是用户使用Linux的桥梁。Shell既是一种命令语言，又是一种程序设计语言。
+Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。`&amp;lt;/pre&amp;gt;
+
+#### 1.2 shell脚本
+
+&amp;lt;pre class=&amp;quot;prettyprint&amp;quot;&amp;gt">
+<meta property="og:updated_time" content="2016-10-20T09:57:44.516Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原]shell  初识">
+<meta name="twitter:description" content="1.shell简介1.1 shellShell 是一个用C语言编写的程序，它是用户使用Linux的桥梁。Shell既是一种命令语言，又是一种程序设计语言。
+Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。`&amp;lt;/pre&amp;gt;
+
+#### 1.2 shell脚本
+
+&amp;lt;pre class=&amp;quot;prettyprint&amp;quot;&amp;gt">
+  
+    <link rel="alternative" href="/atom.xml" title="feison&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">feison</a></h1>
+        </hgroup>
+
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">feison</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img lazy-src="/img/avatar.png" class="js-avatar">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">feison</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-原-shell-初识" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/29/原-shell-初识/" class="article-date">
+      <time datetime="2016-06-29T15:06:30.000Z" itemprop="datePublished">2016-06-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [原]shell  初识
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="1-shell简介"><a href="#1-shell简介" class="headerlink" title="1.shell简介"></a>1.shell简介</h3><h4 id="1-1-shell"><a href="#1-1-shell" class="headerlink" title="1.1 shell"></a>1.1 shell</h4><pre><code>Shell 是一个用C语言编写的程序，它是用户使用Linux的桥梁。Shell既是一种命令语言，又是一种程序设计语言。
+Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。`&lt;/pre&gt;
+
+#### 1.2 shell脚本
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`Shell 脚本（shell script），是一种为shell编写的脚本程序。`&lt;/pre&gt;
+
+#### 1.3shell类型
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`bash
+csh
+dash
+ksh
+....`&lt;/pre&gt;
+
+### 2.shell入门
+
+#### 2.1编写第一个shell脚本
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`test.sh:
+#!/bin/bash
+echo &quot;Hello World !&quot;
+
+注：
+    #!为一个约定的标记，指定shell的相应类型，用什么解释器执行`&lt;/pre&gt;
+
+#### 2.2执行脚本
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.
+    #chmod +x test.sh
+    #./test.sh
+2.
+    /bin/bash test.sh
+`&lt;/pre&gt;
+
+### 3.shell 变量
+
+#### 3.1变量定义
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`var=val
+var=&quot;val&quot;
+var=&apos;val&apos;
+循环赋值：
+for file in &apos;ls /etc&apos;
+规则：
+1.变量定义时，不使用$符号；
+2.变量名与等号之间不能有空格；
+3.首个字符必须为字母（a-z，A-Z）；
+4.中间不能有空格，可以使用下划线（_）；
+5.不能使用标点符号；
+6.不能使用bash里的关键字（可用help命令查看保留关键字）。`&lt;/pre&gt;
+
+#### 3.2使用变量
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`var=val
+echo $var
+echo $(var)`&lt;/pre&gt;
+
+#### 3.3只读变量
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`通过readonly关键字声明：
+var=val
+readonly var`&lt;/pre&gt;
+
+#### 3.4删除变量
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`通过unset关键字声明：
+var=val
+unset var`&lt;/pre&gt;
+
+#### 3.5变量类型
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`环境变量： 所有的程序，包括shell启动的程序，都能访问环境变量，有些程序需要环境变量来保证其正常运行。必要的时候shell脚本也可以定义环境变量。
+
+局部变量：局部变量在脚本或命令中定义，仅在当前shell实例中有效，其他shell启动的程序不能访问局部变量。
+
+shell变量：shell变量是由shell程序设置的特殊变量。shell变量中有一部分是环境变量，有一部分是局部变量，这些变量保证了shell的正常运行`&lt;/pre&gt;
+
+#### 3.6shell字符串
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.字符串声明：
+单引号：
+    str=&apos;string&apos;
+    单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的；
+    单引号字串中不能出现单引号（对单引号使用转义符后也不行）。
+双引号：
+    str=&quot;string&quot;
+    双引号里可以有变量；
+    双引号里可以出现转义字符
+无引：
+    str=string
+2.拼接字符串：
+    your_name=&quot;qinjx&quot;
+    greeting=&quot;hello, &quot;$your_name&quot; !&quot;
+    greeting_1=&quot;hello, ${your_name} !&quot;
+    echo $greeting $greeting_1
+3.获取字符串长度：
+    string=&quot;abcd&quot;
+    echo ${#string} #输出 4
+4.提取子字符串：
+    string=&quot;runoob is a great site&quot;
+    echo ${string:1:4} # 输出 unoo
+5.查找子字符串：
+    string=&quot;runoob is a great company&quot;
+    echo `expr index &quot;$string&quot; is`  # 输出 8
+    注意： 以上脚本中 &quot;`&quot; 是反引号，而不是单引号 &quot;&apos;&quot;。`&lt;/pre&gt;
+
+#### 3.7shell数组
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`bash支持一维数组（不支持多维数组），并且没有限定数组的大小。
+1.定义数组
+    array=(val0 val1 val2 ...)
+
+    array_name=(
+    value0
+    value1
+    value2
+    value3
+    )
+
+    array_name[0]=value0
+    array_name[1]=value1
+    array_name[n]=valuen
+2.读取数组
+    ${array[index]}
+    通过&quot;@&quot;获得数组中的所有元素：
+    echo ${array[@]}
+3.获取数组长度
+    获取数组元素个数：
+    length=${#array[@]}
+    length=${#array[*]}
+    获得单个数组元素的长度：
+    length=${#array[n]}`&lt;/pre&gt;
+
+#### 3.8shell注释
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.以&quot;#&quot;开头行表示shell注释行
+2.shell无多行注释操作，只能每行行头添加&quot;#&quot;`&lt;/pre&gt;
+
+### 4.Shell 传递参数
+
+#### 4.1传递参数使用
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`我们可以在执行 Shell 脚本时，向脚本传递参数，脚本内获取参数的格式为：$n。n 代表一个数字，1 为执行脚本的第一个参数，2 为执行脚本的第二个参数，以此类推……
+例：
+test.sh:
+#!/bin/bash
+echo &quot;Shell 传递参数实例！&quot;;
+echo &quot;执行的文件名：$0&quot;;
+echo &quot;第一个参数为：$1&quot;;
+echo &quot;第二个参数为：$2&quot;;
+echo &quot;第三个参数为：$3&quot;;
+
+效果：
+$ ./test.sh 1 2 3
+Shell 传递参数实例！
+执行的文件名：test.sh
+第一个参数为：1
+第二个参数为：2
+第三个参数为：3`&lt;/pre&gt;
+
+#### 4.2特殊参数
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`$# 传递到脚本的参数个数
+$* 以一个单字符串显示所有向脚本传递的参数。
+    如&quot;$*&quot;用「&quot;」括起来的情况、以&quot;$1 $2 … $n&quot;的形式输出所有参数。
+$$    脚本运行的当前进程ID号
+$! 后台运行的最后一个进程的ID号
+$@ 与$*相同，但是使用时加引号，并在引号中返回每个参数。
+    如&quot;$@&quot;用「&quot;」括起来的情况、以&quot;$1&quot; &quot;$2&quot; … &quot;$n&quot; 的形式输出所有参数。
+$- 显示Shell使用的当前选项，与set命令功能相同。
+$? 显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。
+
+注：
+$* 与 $@ 区别：
+相同点：都是引用所有参数。
+不同点：只有在双引号中体现出来。假设在脚本运行时写了三个参数 1、2、3，，则 &quot; * &quot; 等价于 &quot;1 2 3&quot;（传递了一个参数），而 &quot;@&quot; 等价于 &quot;1&quot; &quot;2&quot; &quot;3&quot;（传递了三个参数）。
+例：
+test.sh:
+#!/bin/bash
+
+echo &quot;-- \$* 演示 ---&quot;
+for i in &quot;$*&quot;; do
+    echo $i
+done
+
+echo &quot;-- \$@ 演示 ---&quot;
+for i in &quot;$@&quot;; do
+    echo $i
+done
+
+效果：
+$ ./test.sh 1 2 3
+-- $* 演示 ---
+1 2 3
+-- $@ 演示 ---
+1
+2
+3`&lt;/pre&gt;
+
+### 5.shell基本运算符
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`原生bash不支持简单的数学运算，但是可以通过其他命令来实现，例如 awk 和 expr，expr 最常用。
+expr 是一款表达式计算工具，使用它能完成表达式的求值操作。
+注意
+1.使用的是反引号 ` 而不是单引号 &apos;；
+2.表达式和运算符之间要有空格，例如 2+2 是不对的，必须写成 2 + 2，这与我们熟悉的大多数编程语言不一样。
+例：
+test.sh:
+#!/bin/bash
+
+val=`expr 2 + 2`
+echo &quot;两数之和为 : $val&quot;`&lt;/pre&gt;
+
+#### 5.1 算数运算符
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;运算符&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;说明&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;举例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+  &lt;td&gt;+&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;加法&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;`expr b` 结果为 30。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;减法&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;`expr b` 结果为 10。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;*&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;乘法&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;`expr b` 结果为  200。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;/&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;除法&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;`expr a` 结果为 2。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;%&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;取余&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;`expr a` 结果为 0。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;=&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;赋值&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;a=$b 将把变量 b 的值赋给 a。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;==&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;相等。用于比较两个数字，相同则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ b ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;!=&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;不相等。用于比较两个数字，不相同则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ b ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+#### 5.2 关系运算符
+
+关系运算符只支持数字，不支持字符串，除非字符串的值是数字。
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;运算符&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;说明&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;返回值&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+  &lt;td&gt;-eq&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测两个数是否相等，相等返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[  $b ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-ne&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测两个数是否相等，不相等返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[  $b ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-gt&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测左边的数是否大于右边的，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[  $b ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-lt&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测左边的数是否小于右边的，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[  $b ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-ge&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测左边的数是否大等于右边的，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ $b ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-le&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测左边的数是否小于等于右边的，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[  $b ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+#### 5.3 布尔运算符
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;运算符&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;说明&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;举例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+  &lt;td&gt;!&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;非运算，表达式为 true 则返回 false，否则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ ! false ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-o&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;或运算，有一个表达式为 true 则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[  20 -o $b -gt 100 ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-a&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;与运算，两个表达式都为 true 才返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[  20 -a $b -gt 100 ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+#### 5.4 逻辑运算符
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;运算符&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;说明&lt;/th&gt;
+  &lt;th&gt;举例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+  &lt;td&gt;&amp;amp;&amp;amp;&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;逻辑的 AND&lt;/td&gt;
+  &lt;td&gt;[[  100 &amp;amp;&amp;amp; $b -gt 100 ]] 返回 false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;||&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;逻辑的 OR&lt;/td&gt;
+  &lt;td&gt;[[  100 ||  100 ]] 返回 true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+#### 5.5 字符串运算符
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;运算符&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;说明&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;举例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+  &lt;td&gt;=&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测两个字符串是否相等，相等返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ b ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;!=&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测两个字符串是否相等，不相等返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ b ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-z&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测字符串长度是否为0，为0返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -z $a ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-n&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测字符串长度是否为0，不为0返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -n $a ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;str&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测字符串是否为空，不为空返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ $a ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+#### 5.6 文件测试运算符
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;运算符&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;说明&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;举例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+  &lt;td&gt;-b file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否是块设备文件，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -b $file ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-c file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否是字符设备文件，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -c $file ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-d file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否是目录，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -d $file ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-f file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -f $file ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-g file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否设置了 SGID 位，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -g $file ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-k file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -k $file ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-p file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否是具名管道，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -p $file ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-u file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否设置了 SUID 位，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -u $file ] 返回 false。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-r file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否可读，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -r $file ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-w file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否可写，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -w $file ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-x file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否可执行，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -x $file ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-s file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件是否为空（文件大小是否大于0），不为空返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -s $file ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-e file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;检测文件（包括目录）是否存在，如果是，则返回 true。&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;[ -e $file ] 返回 true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+### 6.shell echo命令
+
+#### 6.1 显示普通字符串
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`echo &quot;It is a test&quot;
+echo It is a test`&lt;/pre&gt;
+
+#### 6.2 显示转义字符
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`echo &quot;\&quot;It is a test\&quot;&quot;`&lt;/pre&gt;
+
+#### 6.3 显示变量
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`#!/bin/sh
+read name 
+echo &quot;$name It is a test&quot;`&lt;/pre&gt;
+
+#### 6.4 显示换行
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`echo -e &quot;OK! \n&quot; # -e 开启转义
+echo &quot;It it a test&quot;`&lt;/pre&gt;
+
+#### 6.5 显示不换行
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`#!/bin/sh
+echo -e &quot;OK! \c&quot; # -e 开启转义 \c 不换行
+echo &quot;It is a test&quot;`&lt;/pre&gt;
+
+#### 6.6 显示结果定向至文件
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`echo &quot;It is a test&quot; &amp;gt; myfile`&lt;/pre&gt;
+
+#### 6.7 原样输出字符串，不进行转义或取变量(用单引号)
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`echo &apos;$name\&quot;&apos;`&lt;/pre&gt;
+
+#### 6.8 显示命令执行结果
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`echo `date`
+注意是反引号，适用于执行相关命令。`&lt;/pre&gt;
+
+### 7\. shell printf命令
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.printf语法
+    printf format-string [arguments ...]
+例：
+test.sh:
+#!/bin/bash
+
+printf &quot;%-10s %-8s %-4s\n&quot; 姓名 性别 体重kg  
+printf &quot;%-10s %-8s %-4.2f\n&quot; 郭靖 男 66.1234 
+printf &quot;%-10s %-8s %-4.2f\n&quot; 杨过 男 48.6543 
+printf &quot;%-10s %-8s %-4.2f\n&quot; 郭芙 女 47.9876 
+
+格式符使用同C语言的printf函数。`&lt;/pre&gt;
+
+### 7\. shell test命令
+
+Shell中的 test 命令用于检查某个条件是否成立，它可以进行数值、字符和文件三个方面的测试。
+
+#### 7.1 数值测试
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;参数&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+  &lt;td&gt;-eq&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;等于则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-ne&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;不等于则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-gt&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;大于则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-ge&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;大于等于则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-lt&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;小于则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-le&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;小于等于则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+#### 7.2 字符串测试
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;参数&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+  &lt;td&gt;=&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;等于则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;!=&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;不相等则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-z 字符串&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;字符串的长度为零则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-n 字符串&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;字符串的长度不为零则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+#### 7.3 文件测试
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;参数&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+  &lt;td&gt;-e 文件名&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;如果文件存在则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-r 文件名&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;如果文件存在且可读则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-w 文件名&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;如果文件存在且可写则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-x 文件名&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;如果文件存在且可执行则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-s 文件名&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;如果文件存在且至少有一个字符则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-d 文件名&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;如果文件存在且为目录则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-f 文件名&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;如果文件存在且为普通文件则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-c 文件名&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;如果文件存在且为字符型特殊文件则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;-b 文件名&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;如果文件存在且为块特殊文件则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`另外，Shell还提供了与( -a )、或( -o )、非( ! )三个逻辑操作符用于将测试条件连接起来，其优先级为：&quot;!&quot;最高，&quot;-a&quot;次之，&quot;-o&quot;最低。例如：
+#!/bin/bash
+cd /bin
+if test -e ./notFile -o -e ./bash
+then
+    echo &apos;有一个文件存在!&apos;
+else
+    echo &apos;两个文件都不存在&apos;
+fi`&lt;/pre&gt;
+
+### 8.流程控制
+
+#### 8.1if else
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.
+    if condition
+    then
+        command1 
+        command2
+        ...
+        commandN 
+    fi
+2.
+    if condition
+    then
+        command1 
+        command2
+        ...
+        commandN
+    else
+        command
+    fi
+3.
+    if condition1
+    then
+        command1
+    elif condition2 
+    then 
+        command2
+    else
+        commandN
+    fi`&lt;/pre&gt;
+
+#### 8.2for
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.
+    for var in item1 item2 ... itemN
+    do
+        command1
+        command2
+        ...
+        commandN
+    done
+
+无限循环：
+    for (( ; ; ))
+    do
+        commands
+    done`&lt;/pre&gt;
+
+#### 8.3while
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.
+    while condition
+    do
+        command
+    done
+无限循环：
+1.
+    while :
+    do
+        command
+    done
+2.
+    while true
+    do
+        command
+    done
+`&lt;/pre&gt;
+
+#### 8.4case
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.
+    case 值 in
+    模式1)
+        command1
+        command2
+        ...
+        commandN
+        ;;
+    模式2）
+        command1
+        command2
+        ...
+        commandN
+        ;;
+    esac`&lt;/pre&gt;
+
+#### 8.5until
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.
+    until condition
+    do
+        command
+    done`&lt;/pre&gt;
+
+### 8.6 跳出循环
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.break：适用于所有循环，并且跳出所有循环
+2.continue：适用于所有循环，跳出当前循环
+3.esca：仅用于case循环中`&lt;/pre&gt;
+
+### 9.shell函数
+
+#### 9.1 shell函数定义
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`[ function ] funname [()]
+
+{
+
+    action;
+
+    [return int;]
+
+}
+说明：
+    1、可以带function fun() 定义，也可以直接fun() 定义,不带任何参数。
+    2、参数返回，可以显示加：return 返回，如果不加，将以最后一条命令运行结果，作为返回值。 return后跟数值n(0-255)`&lt;/pre&gt;
+
+#### 9.2 shell 函数参数
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.
+在shell函数体内部，通过 $n 的形式来获取参数的值，例如，$1表示第一个参数，$2表示第二个参数...
+例：
+test.sh:
+
+#!/bin/bash
+funWithParam(){
+    echo &quot;第一个参数为 $1 !&quot;
+    echo &quot;第二个参数为 $2 !&quot;
+    echo &quot;第十个参数为 $10 !&quot;
+    echo &quot;第十个参数为 ${10} !&quot;
+    echo &quot;第十一个参数为 ${11} !&quot;
+    echo &quot;参数总数有 $# 个!&quot;
+    echo &quot;作为一个字符串输出所有参数 $* !&quot;
+}
+funWithParam 1 2 3 4 5 6 7 8 9 34 73
+
+效果：
+第一个参数为 1 !
+第二个参数为 2 !
+第十个参数为 10 !
+第十个参数为 34 !
+第十一个参数为 73 !
+参数总数有 11 个!
+作为一个字符串输出所有参数 1 2 3 4 5 6 7 8 9 34 73 !
+
+注意：
+    $10 不能获取第十个参数，获取第十个参数需要${10}。当n&amp;gt;=10时，需要使用${n}来获取参数。
+
+2.特殊参数
+    同shell脚本传参相同，请回顾该小节。`&lt;/pre&gt;
+
+### 10.Shell 输入/输出重定向
+
+#### 10.1重定向命令表
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;命令&lt;/th&gt;
+  &lt;th align=&quot;left&quot;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+  &lt;td&gt;command &amp;gt; file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;将输出重定向到 file。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;command &amp;lt; file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;将输入重定向到 file。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;command &amp;gt;&amp;gt; file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;将输出以追加的方式重定向到 file。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;n &amp;gt; file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;将文件描述符为 n 的文件重定向到 file。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;n &amp;gt;&amp;gt; file&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;将文件描述符为 n 的文件以追加的方式重定向到 file。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;n &amp;gt;&amp;amp; m&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;将输出文件 m 和 n 合并。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;n &amp;lt;&amp;amp; m&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;将输入文件 m 和 n 合并。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;&amp;lt;&amp;lt; tag&lt;/td&gt;
+  &lt;td align=&quot;left&quot;&gt;将开始标记 tag 和结束标记 tag 之间的内容作为输入。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+#### 10.2 Here Document
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`Here Document 是 Shell 中的一种特殊的重定向方式，用来将输入重定向到一个交互式 Shell 脚本或程序。它的作用是将两个 delimiter 之间的内容(document) 作为输入传递给 command。
+它的基本的形式如下：
+command &amp;lt;&amp;lt; delimiter
+    document
+delimiter
+注意：
+    1.结尾的delimiter 一定要顶格写，前面不能有任何字符，后面也不能有任何字符，包括空格和 tab 缩进。
+    2.开始的delimiter前后的空格会被忽略掉。
+例：
+test.sh:
+#!/bin/bash
+
+cat &amp;lt;&amp;lt; EOF
+    welcome
+    feison`s blog！
+EOF
+
+效果：
+welcome
+feison`s blog！`&lt;/pre&gt;
+
+#### 11.shell文件包含
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.Shell 也可以包含外部脚本。这样可以很方便的封装一些公用的代码作为一个独立的文件。
+2.文件包含语法格式：
+. filename   # 注意点号(.)和文件名中间有一空格
+或
+source filename
+
+注意：
+    被包含的文件 test1.sh 不需要可执行权限。`&lt;/pre&gt;
+
+### 12.写在后面
+
+&lt;pre&gt;`本文是学习[菜鸟教程shell](http://www.runoob.com/linux/linux-shell.html)的笔记，记录的是本人在shell方面的薄弱点，主要是打基础，方便以后回顾，编写的不够深入和全面，大家如有不同看法可以留言评论，相互交流学习。
+
+        &lt;div&gt;
+            作者：WEINILUO 发表于2016/6/29 11:06:30 [原文链接](http://blog.csdn.net/weiniluo/article/details/51776869)
+        &lt;/div&gt;
+        &lt;div&gt;
+        阅读：1954 评论：0 [查看评论](http://blog.csdn.net/weiniluo/article/details/51776869#comments)
+        &lt;/div&gt;
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/06/29/原-shell-初识/">[原]shell  初识</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 feison 的个人博客">feison</a></p>
+        <p><span>发布时间:</span>2016年06月29日 - 11时06分</p>
+        <p><span>最后更新:</span>2016年10月20日 - 05时57分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/06/29/原-shell-初识/" title="[原]shell  初识">https://feisonzl.github.io/2016/06/29/原-shell-初识/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://feisonzl.github.io/2016/06/29/原-shell-初识/　　作者: feison" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/06/30/原-网络驱动接口笔记/">
+                    [原]网络驱动接口笔记
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/05/31/原-android系统重启流程分析/">
+                    [原]android系统重启流程分析
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-shell简介"><span class="toc-number">1.</span> <span class="toc-text">1.shell简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-shell"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 shell</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'feisonzl@gmail.com'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/06/30/原-网络驱动接口笔记/" title="上一篇: [原]网络驱动接口笔记">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/05/31/原-android系统重启流程分析/" title="下一篇: [原]android系统重启流程分析">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/原-中断处理/">[原]中断处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/原-驱动中ioctl的使用/">[原]驱动中ioctl的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/原-时间、延迟及延缓操作/">[原]时间、延迟及延缓操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/18/原-I2C协议/">[原]I2C协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/12/转-attribute-机制/">[转]__attribute__机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/26/原-Device-Tree-入门/">[原]Device Tree 入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/原-c-差缺补漏/">[原]c 差缺补漏</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/24/原-ubuntu-定时任务/">[原]ubuntu 定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/03/原-list-for-each-entry深入理解/">[原]list_for_each_entry深入理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/03/原-SSH端口转发与内网穿透/">[原]SSH端口转发与内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/08/转-搬瓦工网速优化net-speeder/">[转]搬瓦工网速优化net-speeder</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/原-网络驱动接口笔记/">[原]网络驱动接口笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/原-shell-初识/">[原]shell  初识</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/31/原-android系统重启流程分析/">[原]android系统重启流程分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/原-linux字符设备驱动初识/">[原]linux字符设备驱动初识</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/27/原-并发与竞态/">[原]并发与竞态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/转-MIPI-小结/">[转]MIPI 小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/23/原-Makfile笔记/">[原]Makfile笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/26/原-windows下的adb连接调试/">[原]windows下的adb连接调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/原-ubuntu下添加用户/">[原]ubuntu下添加用户</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: false,
+            isPost: true,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 feison
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        <div class="visit">
+            <span id="busuanzi_container_site_pv" style='display:none'>
+                <span id="site-visit" >本站到访数: 
+                    <span id="busuanzi_value_site_uv"></span>
+                </span>
+            </span>
+            <span id="busuanzi_container_page_pv" style='display:none'>
+                <span id="page-visit">, 本页阅读量: 
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+            </span>
+        </div>
+    </div>
+</footer>
+    </div>
+    
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

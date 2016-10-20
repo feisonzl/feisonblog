@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原]Makfile笔记 | feison&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.Makfile初识1.1Makefile规则target ... : prerequisites ...
+    command
+    ...
+    ...
+注：  
+target:目标
+prerequisites:依赖文件
+command:makefile 需要执行的命令
+
+Makfile规则：
+    在执行Makfile时，Makfile会判断target文件是否存在，
+    若不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]Makfile笔记">
+<meta property="og:url" content="https://feisonzl.github.io/2016/04/23/原-Makfile笔记/index.html">
+<meta property="og:site_name" content="feison's blog">
+<meta property="og:description" content="1.Makfile初识1.1Makefile规则target ... : prerequisites ...
+    command
+    ...
+    ...
+注：  
+target:目标
+prerequisites:依赖文件
+command:makefile 需要执行的命令
+
+Makfile规则：
+    在执行Makfile时，Makfile会判断target文件是否存在，
+    若不">
+<meta property="og:updated_time" content="2016-10-20T09:48:48.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原]Makfile笔记">
+<meta name="twitter:description" content="1.Makfile初识1.1Makefile规则target ... : prerequisites ...
+    command
+    ...
+    ...
+注：  
+target:目标
+prerequisites:依赖文件
+command:makefile 需要执行的命令
+
+Makfile规则：
+    在执行Makfile时，Makfile会判断target文件是否存在，
+    若不">
+  
+    <link rel="alternative" href="/atom.xml" title="feison&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">feison</a></h1>
+        </hgroup>
+
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">feison</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img lazy-src="/img/avatar.png" class="js-avatar">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">feison</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="#" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-原-Makfile笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/23/原-Makfile笔记/" class="article-date">
+      <time datetime="2016-04-23T22:56:25.000Z" itemprop="datePublished">2016-04-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [原]Makfile笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="1-Makfile初识"><a href="#1-Makfile初识" class="headerlink" title="1.Makfile初识"></a>1.Makfile初识</h1><h2 id="1-1Makefile规则"><a href="#1-1Makefile规则" class="headerlink" title="1.1Makefile规则"></a>1.1Makefile规则</h2><pre><code>target ... : prerequisites ...
+    command
+    ...
+    ...
+注：  
+target:目标
+prerequisites:依赖文件
+command:makefile 需要执行的命令
+
+Makfile规则：
+    在执行Makfile时，Makfile会判断target文件是否存在，
+    若不存在，则执行下面的command命令，
+    若存在，则判断prerequisites的时间戳是否比target的时间戳要新，
+    若是，则也执行下面的command命令。`&lt;/pre&gt;
+
+## 1.2引用其他Makefile文件
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`使用方式：
+include &amp;lt;filename&amp;gt;
+例：
+include foo.make $(value) `&lt;/pre&gt;
+
+## 1.3Makefile变量
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.
+使用方式：
+obj= a.o b.o c.o \
+    d.o e.o
+target : prerequisites
+    command $(obj)
+2.CFLAGS,CXXFLAGS 
+    CFLAGS 表示用于 C 编译器的选项，CXXFLAGS表示用于 C++ 编译器的选项。
+    CFLAGS指定头文件（.h文件）的路径、编译条件宏，如：CFLAGS=-I/usr/include -I/path/include -D_YUQIANG。
+    上面两个变量用于gcc的参数中：$(CC) $(CFLAGS)
+3.LDFLAGS：
+    gcc 等编译器会用到的一些优化参数，也可以在里面指定库文件的位置。用法：
+    LDFLAGS=-L/usr/lib -L/path/to/your/lib。
+4.LIBS：告诉链接器要链接哪些库文件，如LIBS = -lpthread -liconv
+`&lt;/pre&gt;
+
+## 1.4Makefile工作流程
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.在敲入make之后，make会在当前目录下寻找Makefile类型文件
+2.读入被include包含的makefile文件
+3.替换变量
+4.推到并分析所有规则
+5.位所有的目标创建依赖关系链
+6.找到文件中的第一个target作为最终的目标文件
+7.找到target后按照规则执行，若target的依赖文件也存在依赖文件，则同样按照规则递归执行，直到生成最终的目标文件后make执行完成`&lt;/pre&gt;
+
+# 2.书写规则
+
+## 2.1规则语法
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`方式1：
+targets : prereuuisites
+    command
+    ...
+方式2：
+targets : prereuuisites ; command
+    command
+    ...
+注意：
+1，若command为独立行，则需以&amp;lt;TAB&amp;gt;开头
+2.换行符：&apos;\&apos;
+3.command默认使用/bash/sh来执行`&lt;/pre&gt;
+
+## 2.2通配符
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`&apos;*&apos;:代表『 0 个到无穷多个』任意字符
+&apos;?&apos;:代表『一定有一个』任意字符
+&apos;~&apos;:代表用户的主目录，~feison/data代表用户feison主目录下的data目录
+注：若需要使用这些特定字符，在该字符前加转义字符&apos;\&apos;`&lt;/pre&gt;
+
+## 2.3文件搜索路径
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.VPATH变量
+VPATH:makefile中设定默认搜索文件路径的变量
+例：VPATH= src:../headers
+注：设置多个路径用冒号分隔
+2.vpath关键字
+vpath &amp;lt;pattern&amp;gt; &amp;lt;directories&amp;gt; :为符合模式&amp;lt;pattern&amp;gt;的文件指定搜索目录&amp;lt;directories&amp;gt;
+vpath &amp;lt;pattern&amp;gt; :清除符合模式&amp;lt;pattern&amp;gt;的文件的搜索目录
+vpath :清除所有已设置好的文件搜索目录
+例：vpath %h ../headers`&lt;/pre&gt;
+
+## 2.4伪目标
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`伪目标声明方式：
+隐式声明：
+phonytargets:
+    commands
+显式声明：
+.PHONY:phonytargets
+phonytargets:
+    commands
+例：生成多个可执行文件
+all:prog1 prog2 prog3
+.PHONY: all
+
+prog1:prog1.o
+    commands1
+prog2:prog2.o
+    commands2
+prog3:prog3.o
+    commands3`&lt;/pre&gt;
+
+## 2.5静态模式
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`规则：
+&amp;lt;targets&amp;gt;:&amp;lt;target-pattern&amp;gt;:&amp;lt;prereq-pattern&amp;gt;
+    &amp;lt;commands&amp;gt;
+    ...
+注：
+targets：目标集，多个目标文件
+target-pattern：目标集模式
+prereq-pattern：依赖模式
+例：
+foo.o bar.o abc.m : %.o : %.c
+    $(CC) -c $(CFLAGS) $&amp;lt; -o $@
+上述的.o文件的依赖文件为.c文件，当不满足makefile原则时，执行下面的命令`&lt;/pre&gt;
+
+# 3.书写命令
+
+## 3.1显示命令
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.@command和command比较
+    @command 该命令不会被make显示
+    command 该命令会被make显示
+例：
+    @echo this is a test
+    make输出：
+    this is a test
+
+    echo this is a test
+    make输出：
+    echo this is a test
+    this is a test
+2.make -n 只显示命令，但不执行命令
+3.make -s 全面禁止命令的显示`&lt;/pre&gt;
+
+## 3.2嵌套执行make
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`make嵌套，亦是make包含，以利于模块编译和分段编译
+例：
+./Makefile:(总控Makefile)
+subsystem:
+    cd subdir &amp;amp;&amp;amp; $(MAKE)
+&amp;lt;==&amp;gt;
+sybsystem:
+    $(MAKE) -C subdir
+1.makefile中的变量传递
+默认情况下，上级的Makefile中的变量可以传递到下级makefile中，但不会覆盖下级makefile中的变量，除非制定了-e参数。
+export &amp;lt;variable ...&amp;gt; 声明要传递到下级makefile的变量
+unport &amp;lt;variable ...&amp;gt; 声明不能传递到下级makefile的变量
+注：
+SHELL和MAKEFLAGS两个变量始终会被传递到下级makefile中
+2.make -w
+当make进入和离开下级目录时，输出相应的目录变化信息`&lt;/pre&gt;
+
+## 3.3定义命令块
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`规则：
+define cmdblocks-name
+cmd1
+cmd2
+...
+endef
+例：
+target : prereqs
+    $(cmdblocks-name)`&lt;/pre&gt;
+
+# 4.变量
+
+## 4.1变量声明
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.常规变量
+variable = value
+$(variable)==&amp;gt;value
+${variable}==&amp;gt;value
+2.变量中的变量
+variable ：=value
+1中的声明方式会出现无限的变量展开中，如下
+A=$(B)
+B=$(A)
+:=的声明方式规定前面的变量不能使用后面的变量,若使用的变量前面未被定义，则其值为空
+例：
+x:=foo
+y:=$(x) bar $(m)
+x:=later
+==&amp;gt;
+y:=foo bar
+x:=later
+3.定义一个其值为空格的变量
+nullstring:=
+space:=$(nullstring) #end of the line
+注：nullstring为Empty变量，space表示一个空格，Empty变量表示一个变量的值开始了，#表示变量的定义终止
+4.操作符?=
+variable ?=value
+表示若variable之前被定义过，则该语句无效，若没有被定义过，其值为value`&lt;/pre&gt;
+
+## 4.2变量使用
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.多重变量
+x=y
+y=z
+a:=$($(x))
+==&amp;gt;
+a:=z
+
+2.变量值的替换
+$(var:a=b)
+${var:a=b}
+表示把变量var中所有以a字符串结尾的a替换为b字符串
+例：
+foo := a.o b.o c.o
+bar :=$(foo:.o=.c)
+
+foo := a.o b.o c.o
+bar :=$(foo:%.o=%.c)
+
+3.追加变量
+variable +=value
+例：
+a := b
+a +=c
+==&amp;gt;
+a := b
+a :=$(a) b
+
+4.其他
+例：
+first_second = Hello
+a = first
+b = second
+c =$($(a)_$(b))
+==&amp;gt;
+c = Hello`&lt;/pre&gt;
+
+## 4.3override标识符
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`通过make的命令行参数设置的变量，通常在makefile中对这些变量赋值是无效的，但可以通过override标识符重新设置这些变量的值。
+1.
+override &amp;lt;variable&amp;gt;; =&amp;lt;value&amp;gt;
+2.
+override &amp;lt;variable&amp;gt;; :=&amp;lt;value&amp;gt;
+3.
+override &amp;lt;variable&amp;gt;; +=&amp;lt;value&amp;gt;
+4.
+override define foo
+bar
+endef
+`&lt;/pre&gt;
+
+## 4.4多行变量
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`声明方式：
+define two-lines
+echo foo
+echo $(bar)
+endef
+注：参见3.3定义命令块`&lt;/pre&gt;
+
+## 4.5环境变量
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`参见3.2嵌套执行make`&lt;/pre&gt;
+
+## 4.6目标变量
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`目标变量表示为某个特定的目标设定的变量，该变量的值只适用于特殊目标
+声明：
+&amp;lt;target ...&amp;gt;:&amp;lt;variable-assignment&amp;gt;
+&amp;lt;target ...&amp;gt;:override &amp;lt;variable-assignment&amp;gt;
+注：
+&amp;lt;variable-assignment&amp;gt;表示常规赋值表达式
+第二个声明适用于make命令带入的变量或环境变量
+例：
+m = flag
+target：m= flag_target
+target:
+    @echo $(m)
+则$(m)的值为flage_target`&lt;/pre&gt;
+
+## 4.7模式变量
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`声明：
+&amp;lt;pattern ...&amp;gt;:&amp;lt;variable-assignment&amp;gt;
+&amp;lt;pattern ...&amp;gt;:override &amp;lt;variable-assignment&amp;gt;
+使用方式同目标变量
+例：
+%.o : CFLAGS = -g
+prog: prog1.o prog2.o
+    $(CC) $(CFLAGS ) prog1.o prog2.o
+prog1.o:prog1.c
+    $(CC) $(CFLAGS ) prog1.c
+prog2.o:prog2.c
+    $(CC) $(CFLAGS ) prog2.c
+以上只有prog1.o和prog2.o下的命令中的CFLAGS的值为-O，其余为系统变量的值`&lt;/pre&gt;
+
+## 4.8自动化变量
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`在模式规则中（将在&amp;lt;隐含规则&amp;gt;一节中讲解），规则的目标和依赖文件名代表了一类文件名。命令是对所有这一类文件重建过程的描述，显然，在命令中不能指定特定的文件名，否则模式规则将没有了意义。那么在模式规则的命令行中该如何表示文件，将成我们这一小节的讨论重点。make中使用了“自动环变量”来实现这个目的，自动化变量的取值是根据具体的规则决定的，就是说对不同的规则其所代表的文件名不同。
+前边我们也看到了很多例子中使用到了自动化变量。下面对所有的自动化变量进行说明：
+$@
+代表规则中的目标文件名。如果目标是一个文档（Linux中，一般称.a文件为文档），那么它代表这个文档的文件名。在多目标的模式规则中，它代表的是哪个触发规则被执行的目标文件名。
+$%
+规则的目标文件是一个静态库文件时，代表静态库的一个成员名。例如，规则的目标是“foo.a(bar.o)”，那么，“$%”的值就为“bar.o”，“$@”的值为“foo.a”。如果目标不是函数库文件，其值为空。
+$&amp;lt;
+规则的第一个依赖文件名。如果是隐含规则，则它代表通过目标指定的第一个依赖文件。
+$?
+所有比目标文件更新的依赖文件列表，空格分割。如果目标是静态库文件名，代表的是库成员（.o文件）的更新情况。
+$^
+规则的所有依赖文件列表，使用空格分隔。如果目标是静态库文件名，它所代表的只能是所有库成员（.o文件）名。一个文件可重复的出现在目标的依赖中，变量“$^”只记录它的一次引用情况。就是说变量“$^”会去掉重复的依赖文件。
+$+
+类似“$^”，但是它保留了依赖文件中重复出现的文件。主要用在程序链接时，库的交叉引用场合。
+$*
+在模式规则和静态模式规则中，代表“茎”。“茎”是目标模式中“%”所代表的部分（当文件名中存在目录时，“茎”也包含目录（斜杠之前）部分）。例如：文件“dir/a.foo.b”，当目标的模式为“a.%.b”时，“$*”的值为“dir/a.foo”。“茎”对于构造相关文件名非常有用。
+自动化变量“$*”需要两点说明：
+Ø        对于一个明确指定的规则来说不存在“茎”，这种情况下“$*”所代表的值发生变化。此时，如果目标文件名带有一个可识别的后缀，那么“$*”表示文件中除后缀以外的部分。例如：“foo.c”则“$*”的值为：“foo”，因为.c是一个可识别的文件后缀名。GUN make对明确规则的这种奇怪的处理行为是为了和其它版本的make兼容。通常，在除静态规则和模式规则以外，明确指定目标文件的规则中避免使用这个变量。
+Ø        当明确指定文件名的规则中目标文件名包含不可识别的后缀时，此变量为空。
+自动化变量“$?”在显式规则中也是非常有用的，规则中可以使用它来指定只对更新的依赖文件进行操作。例如，函数库文件“libN.a”，它由一些.o文件组成。如下的规则实现了根据变化的.o文件更新库文件：
+
+lib: foo.o bar.o lose.o win.o
+    ar r lib $?
+
+上述列出的自动量变量中。其中有四个在规则中代表一个文件名（$@、$&amp;lt;、$%、$*）。而其它三个的在规则中代表一个文件名的列表。GUN make中，还可以通过这七个自动化变量来获取一个完整文件名中的目录部分或者具体文件名，需要在这些变量中加入“D”或者“F”字符。这样就形成了一系列变种的自动环变量。这些变量在以前版本的make中使用，在当前版本的make中，可以使用“dir”或者“notdir”函数来实现同样的功能。
+$(@D)
+代表目标文件的目录部分（去掉目录部分的最后一个斜杠）。如果“$@”是“dir/foo.o”，那么“$(@D)”的值为“dir”。如果“$@”不存在斜杠，其值就是“.”（当前目录）。注意它和函数“dir”的区别！
+$(@F)
+目标文件的完整文件名中除目录以外的部分（实际文件名）。如果“$@”为“dir/foo.o”，那么“$(@F)”只就是“foo.o”。“$(@F)”等价于函数“$(notdir $@)”。
+$(*D)
+$(*F)
+分别代表目标“茎”中的目录部分和文件名部分。
+$(%D)
+$(%F)
+当以如“archive(member)”形式静态库为目标时，分别表示库文件成员“member”名中的目录部分和文件名部分。它仅对这种形式的规则目标有效。
+$(&amp;lt;D)
+$(&amp;lt;F)
+分别表示规则中第一个依赖文件的目录部分和文件名部分。
+$(^D)
+$(^F)
+分别表示所有依赖文件的目录部分和文件部分（不存在同一文件）。
+$(+D)
+$(+F)
+分别表示所有依赖文件的目录部分和文件部分（可存在重复文件）。
+$(?D)
+$(?F)
+分别表示被更新的依赖文件的目录部分和文件部分。`&lt;/pre&gt;
+
+# 5.逻辑判断语句
+
+## 5.1使用语法
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.ifeq/else/endif
+    &amp;lt;1&amp;gt;
+    ifeq (&amp;lt;arg1&amp;gt;,&amp;lt;arg2&amp;gt;)
+    &amp;lt;text-ifeq&amp;gt;
+    else
+    &amp;lt;text-else&amp;gt;
+    endif
+
+    &amp;lt;2&amp;gt;
+    ifeq (&amp;lt;arg1&amp;gt;,&amp;lt;arg2&amp;gt;)
+    &amp;lt;text-ifeq&amp;gt;
+    endif
+
+2.ifneq/else/endif
+    &amp;lt;1&amp;gt;
+    ifneq (&amp;lt;arg1&amp;gt;,&amp;lt;arg2&amp;gt;)
+    &amp;lt;text-ifneq&amp;gt;
+    else
+    &amp;lt;text-else&amp;gt;
+    endif
+
+    &amp;lt;2&amp;gt;
+    ifneq (&amp;lt;arg1&amp;gt;,&amp;lt;arg2&amp;gt;)
+        &amp;lt;text-ifneq&amp;gt;
+    endif
+
+3.ifdef/else/endif
+    &amp;lt;1&amp;gt;
+    ifdef &amp;lt;variable-name&amp;gt;
+    &amp;lt;text-ifdef&amp;gt;
+    else
+    &amp;lt;text-else&amp;gt;
+    endif
+
+    &amp;lt;2&amp;gt;
+    ifdef &amp;lt;variable-name&amp;gt;
+    &amp;lt;text-ifdef&amp;gt;
+    endif
+
+4.if &amp;lt;condition&amp;gt;, &amp;lt;then-part&amp;gt;, &amp;lt;else-part&amp;gt;
+    相当于C语言中:
+    if(condition)
+        then-part;
+    else
+        else-part;`&lt;/pre&gt;
+
+# 6.常用函数
+
+## 6.1函数调用语法
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`语法：
+$(&amp;lt;function&amp;gt; &amp;lt;arguments&amp;gt;)
+${&amp;lt;function&amp;gt; &amp;lt;arguments&amp;gt;}`&lt;/pre&gt;
+
+## 6.2字符串处理函数
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.subst
+字符串替换函数
+$(subst &amp;lt;from&amp;gt;,&amp;lt;to&amp;gt;,&amp;lt;text&amp;gt;)
+例：
+$(subst ee,EE,feet on the street)
+==&amp;gt;fEEt on the strEEt
+
+2.patsubst
+模式字符串替换函数
+$(patsubst &amp;lt;pattern&amp;gt;,&amp;lt;replacement&amp;gt;,&amp;lt;text&amp;gt;)
+
+3.strip
+去空格函数，去掉字符串开头和结尾的空格
+$(strip &amp;lt;string&amp;gt;)
+
+4.findstring
+查找字符串函数
+$(findstring &amp;lt;findstr&amp;gt;,&amp;lt;string&amp;gt;)
+
+5.filter
+过滤函数
+$(filter &amp;lt;pattern...&amp;gt;,&amp;lt;text&amp;gt;)
+
+6.filter-out
+反过滤函数
+$(filter-out &amp;lt;pattern...&amp;gt;,&amp;lt;text&amp;gt;)
+
+7.sort
+排序函数
+$(sort &amp;lt;list&amp;gt;)
+
+8.word
+取单词函数
+$(word &amp;lt;n&amp;gt;,&amp;lt;text&amp;gt;)
+
+9.wordlist
+取单词串函数，得到从&amp;lt;s_num&amp;gt;到&amp;lt;e_num&amp;gt;的单词串
+$(wordlist &amp;lt;s_num&amp;gt;,&amp;lt;e_num&amp;gt;,&amp;lt;text&amp;gt;)
+
+10.words
+单词数统计函数
+$(words &amp;lt;string&amp;gt;)
+
+11.firstword
+取首单词函数
+$(firstword &amp;lt;string&amp;gt;)
+`&lt;/pre&gt;
+
+## 6.3文件名操作函数
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.dir
+取目录函数
+$(dir &amp;lt;path_files_name&amp;gt;)
+
+2.notdir
+取文件名函数
+$(nodir &amp;lt;path_files_name&amp;gt;)
+
+3.suffix
+取后缀函数
+$(suffix &amp;lt;names&amp;gt;)
+
+4.basename
+取前缀函数
+$(basename &amp;lt;names&amp;gt;)
+
+5.addsuffix
+添加后缀函数
+$(addsuffix &amp;lt;suffix&amp;gt;,&amp;lt;names&amp;gt;)
+
+6.addprefix
+添加前缀函数
+$(addprefix  &amp;lt;prefix&amp;gt;,&amp;lt;names&amp;gt;)
+
+7.join
+连接函数
+$(join &amp;lt;list1&amp;gt;,&amp;lt;list2&amp;gt;)
+`&lt;/pre&gt;
+
+## 6.4makefile调试函数
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.error
+产生一个致命错误
+$(error &amp;lt;text&amp;gt;)
+
+2.warning
+生成一个警告信息
+$(warning &amp;lt;text&amp;gt;)
+
+3.info
+生成一个普通信息
+$(info &amp;lt;text&amp;gt;)`&lt;/pre&gt;
+
+## 6.5其他函数
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`1.foreach
+循环函数
+$(foreach &amp;lt;var&amp;gt;,&amp;lt;list&amp;gt;,&amp;lt;text&amp;gt;)
+
+2.if
+条件判断函数
+$(if &amp;lt;condition&amp;gt;,&amp;lt;then-part&amp;gt;)
+$(if &amp;lt;condition&amp;gt;,&amp;lt;then-part&amp;gt;,&amp;lt;else-part&amp;gt;)
+
+3.call
+调用函数的函数
+$(call &amp;lt;func&amp;gt;,&amp;lt;parm1&amp;gt;,&amp;lt;parm2&amp;gt;,&amp;lt;parm3&amp;gt;,...)
+注：
+func：自定义函数
+parm1：func中的参数1（$(1)）
+parm2: func中的参数2（$(2)）
+func中的所有参数变量均用,$(1),$(2)...表示
+例：
+reverse = $(2) $(1)
+foo=$(call reverse ,a,b)
+==&amp;gt;
+foo=b a
+
+4.origin
+变量源函数，输出变量来源
+源列表：
+&amp;lt;1&amp;gt;undefined:未定义变量
+&amp;lt;2&amp;gt;default:默认定义
+&amp;lt;3&amp;gt;environment:环境变量
+&amp;lt;4&amp;gt;file:makefile中定义的变量
+&amp;lt;5&amp;gt;command line:命令行定义的变量
+&amp;lt;6&amp;gt;override:override重新定义的变量
+&amp;lt;7&amp;gt;automatic:自动化变量
+$(origin &amp;lt;variable&amp;gt;)
+
+5.shell
+调用外部shell命令函数
+$(shell commands)
+例：
+fileslist：=$(shell echo *.c)
+`&lt;/pre&gt;
+
+# 7.Makefile调试功能
+
+## 7.1makefile调试
+
+&lt;pre class=&quot;prettyprint&quot;&gt;&lt;/pre&gt;
+
+## 7.2makefile 源码调试
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`一般方式是通过makefile向源码增加宏定义
+main.c:
+#ifdef DEBUG
+.....
+Makefile:
+.PHONY: all clean
+
+LINUX_ROOT=$(LINUX_SRC)
+
+obj-m := sil9024.o
+
+all:
+    @make -C $(LINUX_ROOT) M=$(PWD) modules &quot;CFLAGS += -DDEBUG&quot;
+    @cp sil9024.ko ../ko/  -vfr
+
+clean:
+    @make -C $(LINUX_ROOT) M=$(PWD) clean`&lt;/pre&gt;
+
+# 8.隐含规则
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`这里写代码片
+</code></pre><h1 id="9-写在后面"><a href="#9-写在后面" class="headerlink" title="9.写在后面"></a>9.写在后面</h1><p>非常感谢皓哥的《跟我一起写Makefile》，之前看过一点，不过没有机会全部了解，这次基本全部了解过，这是我的一点读书笔记，主要参考的就是皓哥的这本书（姑且算书吧^-^），目的为分析安卓源码中的makefile打基础，所以研究不是很深入，以后有时间再深入了解。</p>
+<pre><code>&lt;div&gt;
+    作者：WEINILUO 发表于2016/4/23 18:56:25 [原文链接](http://blog.csdn.net/weiniluo/article/details/51136429)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：55 评论：0 [查看评论](http://blog.csdn.net/weiniluo/article/details/51136429#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/04/23/原-Makfile笔记/">[原]Makfile笔记</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 feison 的个人博客">feison</a></p>
+        <p><span>发布时间:</span>2016年04月23日 - 18时56分</p>
+        <p><span>最后更新:</span>2016年10月20日 - 05时48分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/04/23/原-Makfile笔记/" title="[原]Makfile笔记">https://feisonzl.github.io/2016/04/23/原-Makfile笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://feisonzl.github.io/2016/04/23/原-Makfile笔记/　　作者: feison" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/04/25/转-MIPI-小结/">
+                    [转]MIPI 小结
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/02/26/原-windows下的adb连接调试/">
+                    [原]windows下的adb连接调试
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Makfile初识"><span class="toc-number">1.</span> <span class="toc-text">1.Makfile初识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1Makefile规则"><span class="toc-number">1.1.</span> <span class="toc-text">1.1Makefile规则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-写在后面"><span class="toc-number">2.</span> <span class="toc-text">9.写在后面</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'feisonzl@gmail.com'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/04/25/转-MIPI-小结/" title="上一篇: [转]MIPI 小结">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/02/26/原-windows下的adb连接调试/" title="下一篇: [原]windows下的adb连接调试">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/原-中断处理/">[原]中断处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/原-驱动中ioctl的使用/">[原]驱动中ioctl的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/原-时间、延迟及延缓操作/">[原]时间、延迟及延缓操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/18/原-I2C协议/">[原]I2C协议</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/12/转-attribute-机制/">[转]__attribute__机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/26/原-Device-Tree-入门/">[原]Device Tree 入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/原-c-差缺补漏/">[原]c 差缺补漏</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/24/原-ubuntu-定时任务/">[原]ubuntu 定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/03/原-list-for-each-entry深入理解/">[原]list_for_each_entry深入理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/03/原-SSH端口转发与内网穿透/">[原]SSH端口转发与内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/08/转-搬瓦工网速优化net-speeder/">[转]搬瓦工网速优化net-speeder</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/原-网络驱动接口笔记/">[原]网络驱动接口笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/原-shell-初识/">[原]shell  初识</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/31/原-android系统重启流程分析/">[原]android系统重启流程分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/原-linux字符设备驱动初识/">[原]linux字符设备驱动初识</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/27/原-并发与竞态/">[原]并发与竞态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/转-MIPI-小结/">[转]MIPI 小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/23/原-Makfile笔记/">[原]Makfile笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/26/原-windows下的adb连接调试/">[原]windows下的adb连接调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/原-ubuntu下添加用户/">[原]ubuntu下添加用户</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+        <script>
+            var yiliaConfig = {
+            fancybox: true,
+            mathjax: true,
+            animate: true,
+            isHome: false,
+            isPost: true,
+            isArchive: false,
+            isTag: false,
+            isCategory: false,
+            open_in_new: false
+            }
+        </script>
+        
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 feison
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        <div class="visit">
+            <span id="busuanzi_container_site_pv" style='display:none'>
+                <span id="site-visit" >本站到访数: 
+                    <span id="busuanzi_value_site_uv"></span>
+                </span>
+            </span>
+            <span id="busuanzi_container_page_pv" style='display:none'>
+                <span id="page-visit">, 本页阅读量: 
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+            </span>
+        </div>
+    </div>
+</footer>
+    </div>
+    
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
